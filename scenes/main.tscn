@@ -50,6 +50,8 @@ shape = SubResource( 1 )
 [node name="RayCast2D" type="RayCast2D" parent="player"]
 position = Vector2( 32, 32 )
 
+[node name="Tween" type="Tween" parent="player"]
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 1, 0 )
 tile_set = SubResource( 3 )
