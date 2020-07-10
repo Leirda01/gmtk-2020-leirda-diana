@@ -18,6 +18,11 @@ _global_script_class_icons={
 config/name="GMTK 2020"
 run/main_scene="res://scenes/main.tscn"
 
+[display]
+
+window/size/height=512
+window/size/resizable=false
+
 [input]
 
 left={

@@ -7,10 +7,10 @@ var inputs = {"right": Vector2.RIGHT,
 				"left": Vector2.LEFT,
 				"up": Vector2.UP,
 				"down": Vector2.DOWN}
-
-func _ready():
-	position = position.snapped(Vector2.ONE * tile_size)
-	position += Vector2.ONE * tile_size / 2
+#
+#func _ready():
+#	position = position.snapped(Vector2.ONE * tile_size)
+#	position += Vector2.ONE * tile_size
 
 func _unhandled_input(event):
 	for direction in inputs.keys():
