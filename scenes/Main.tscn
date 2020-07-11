@@ -67,3 +67,5 @@ script = ExtResource( 7 )
 
 [node name="Spawner" parent="." instance=ExtResource( 5 )]
 position = Vector2( 72, 72 )
+[connection signal="attack" from="." to="." method="_on_Main_attack"]
+[connection signal="next_turn" from="." to="." method="_on_Main_next_turn"]
