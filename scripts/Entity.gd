@@ -1,21 +1,20 @@
 extends Area2D
 
+
 export var speed = 15
 export var tile_size = 64
 
 onready var ray = $RayCast2D
 onready var tween = $Tween
 
-func set_texture(texture: Texture):
-	$Sprite.set_texture(texture)
+func move(direction: Vector2):
+	if can_move(direction):
+		smoothly_move(direction)
 
-func move(direction):
+func can_move(direction: Vector2) -> bool:
 	ray.cast_to = direction * tile_size
 	ray.force_raycast_update()
-	var collider = ray.get_collider()
-	if collider:
-		return collider
-	smoothly_move(direction)
+	return false if ray.get_collider() else true
 
 func smoothly_move(direction):
 	tween.interpolate_property(self, "position",

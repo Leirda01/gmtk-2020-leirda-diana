@@ -20,5 +20,9 @@ run/main_scene="res://scenes/Main.tscn"
 
 [display]
 
-window/size/height=512
+window/size/height=1024
 window/size/resizable=false
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
