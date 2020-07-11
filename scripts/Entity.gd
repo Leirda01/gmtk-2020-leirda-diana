@@ -17,6 +17,8 @@ func can_move(direction: Vector2) -> bool:
 	return false if ray.get_collider() else true
 
 func smoothly_move(direction):
+	if tween.is_active():
+		return
 	tween.interpolate_property(self, "position",
 		position, position + direction * tile_size, 1.0 / speed)
 	tween.start()
