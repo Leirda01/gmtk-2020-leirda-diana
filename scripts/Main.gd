@@ -3,6 +3,7 @@ extends Node
 const Enemy = preload("res://scenes/Enemy.tscn")
 
 var enemy_index : int = 0
+var score = 0
 
 const directions = {
 	"ui_right": Vector2.RIGHT,
@@ -13,12 +14,17 @@ const directions = {
 
 func _process(_delta):
 	if enemy_index < $Enemies.get_child_count():
-		$Cursor.position = $Enemies.get_child(enemy_index).position
+		$Cursor.position = $Enemies \
+		.get_child(enemy_index) \
+		.get_node("Controller") \
+		.get_global_position()
 		return
 	# dis à la machine de calculer les attaques ici
 	$Player.random_move()
-	$Spawner.add_enemy($Enemies, Enemy.instance())
+	if (score % 4 == 0):
+		$Spawner.add_enemy($Enemies, Enemy.instance())
 	enemy_index = 0
+	score += 1
 
 func _input(event):
 	if enemy_index <= $Enemies.get_child_count():

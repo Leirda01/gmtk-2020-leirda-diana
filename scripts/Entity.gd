@@ -16,6 +16,7 @@ func move(direction: Vector2) -> bool:
 func can_move(direction: Vector2) -> bool:
 	ray.cast_to = direction * tile_size
 	ray.force_raycast_update()
+
 	var collider = ray.get_collider()
 	if not collider:
 		return true
