@@ -31,7 +31,6 @@ func _process(_delta):
 				return
 			emit_signal("next_turn")
 	if enemy_index == $Enemies.get_child_count():
-		$Cursor.set_visible(false)
 		emit_signal("attack")
 		enemy_index += 1
 
@@ -65,6 +64,7 @@ static func get_clean_input_list() -> Dictionary:
 
 
 func _on_Main_next_turn():
+	$Cursor.hide_cursor()
 	$Player.random_move()
 	if (score % 4 == 0):
 		$Spawner.add_enemy($Enemies, Enemy.instance())
