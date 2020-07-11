@@ -17,6 +17,10 @@ func attack():
 	yield(get_tree(), "idle_frame")
 	var colliders = remove_item($Controller, $Range.get_overlapping_areas())
 	for collider in colliders:
+		if collider.has_method("lose"):
+			collider.lose()
+			return
+	for collider in colliders:
 		if collider.has_method("die"):
 			collider.die()
 			return

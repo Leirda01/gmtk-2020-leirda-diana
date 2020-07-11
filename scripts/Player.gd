@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 
 func random_move():
@@ -12,3 +12,6 @@ func available_directions():
 		if $Controller.can_move(direction):
 			available_directions += [direction]
 	return available_directions
+
+func lose():
+	print("la partie est perdu!")
