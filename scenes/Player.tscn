@@ -8,6 +8,7 @@
 script = ExtResource( 3 )
 
 [node name="Controller" parent="." instance=ExtResource( 2 )]
+speed = 3
 
 [node name="Sprite" type="Sprite" parent="Controller"]
 texture = ExtResource( 1 )
