@@ -8,7 +8,7 @@ func hilight(object):
 	set_visible(true)
 	object.show_range()
 
-func hide_cursor():
+func hide():
 	if last_object:
 		last_object.hide_range()
 	set_visible(false)

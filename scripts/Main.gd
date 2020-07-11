@@ -29,7 +29,8 @@ func _process(_delta):
 			.get_node("Controller") \
 			.can_move(vectors[key]):
 				return
-			emit_signal("next_turn")
+			enemy_index += 1
+			$Cursor.hide()
 	if enemy_index == $Enemies.get_child_count():
 		emit_signal("attack")
 		enemy_index += 1
@@ -41,7 +42,7 @@ func _input(event):
 					and $Enemies.get_child(enemy_index).move(vectors[key]):
 				enemy_index += 1
 				remove_from_input_list(key)
-				print(input_list)
+				return { "ui_right": 0, "ui_up": 0, "ui_left": 0, "ui_down": 0 }
 
 
 func remove_from_input_list(key: String):
@@ -64,13 +65,13 @@ static func get_clean_input_list() -> Dictionary:
 
 
 func _on_Main_next_turn():
-	$Cursor.hide_cursor()
+	$Cursor.hide()
 	$Player.random_move()
 	if (score % 4 == 0):
 		$Spawner.add_enemy($Enemies, Enemy.instance())
 	score += 1
 	input_list = get_random_input_list($Enemies.get_child_count())
-	print(input_list)
+	print("turn: " + String(score) + " input: " + String(input_list))
 	enemy_index = 0
 
 
