@@ -1,6 +1,5 @@
 extends Node2D
 
-
 signal has_attacked
 
 func move(direction: Vector2):

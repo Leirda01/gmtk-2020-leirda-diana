@@ -9,8 +9,7 @@ onready var tween = $Tween
 
 func move(direction: Vector2) -> bool:
 	if can_move(direction):
-		smoothly_move(direction)
-		return true
+		 return smoothly_move(direction)
 	return false
 
 func can_move(direction: Vector2) -> bool:
@@ -30,7 +29,8 @@ func can_move(direction: Vector2) -> bool:
 
 func smoothly_move(direction):
 	if tween.is_active():
-		return
+		return false
 	tween.interpolate_property(self, "position",
 		position, position + direction * tile_size, 1.0 / speed)
 	tween.start()
+	return true

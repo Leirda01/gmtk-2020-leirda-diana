@@ -5,8 +5,8 @@ const Enemy = preload("res://scenes/Enemy.tscn")
 signal attack
 signal next_turn
 
-var enemy_index : int = 0
-var score = 0
+var score: = 0
+var attack: = false
 
 const vectors = {
 	"ui_right": Vector2.RIGHT,
@@ -15,34 +15,33 @@ const vectors = {
 	"ui_down": Vector2.DOWN,
 }
 
-onready var input_list : Dictionary
+onready var enemy_list: = $Enemies.get_children()
+onready var input_list: Dictionary
 
 func _ready():
 	randomize()
 
 func _process(_delta):
-		
-	if enemy_index < $Enemies.get_child_count():
-		$Cursor.hilight($Enemies.get_child(enemy_index))
-		for key in input_list.keys():
-			if $Enemies.get_child(enemy_index) \
-			.get_node("Controller") \
-			.can_move(vectors[key]):
-				return
-			enemy_index += 1
-			$Cursor.hide()
-	if enemy_index == $Enemies.get_child_count():
+	if enemy_list.empty() and not attack:
 		emit_signal("attack")
-		enemy_index += 1
+		enemy_list = $Enemies.get_children()
+	else:
+		for key in input_list.keys():
+			if enemy_list.front().get_node("Controller").can_move(vectors[key]):
+				$Cursor.hilight(enemy_list.front())
+				return
+		print("SKIP")
+		$Cursor.hide()
+		enemy_list.pop_front()
 
 func _input(event):
-	if enemy_index < $Enemies.get_child_count():
+	if not enemy_list.empty():
 		for key in input_list.keys():
-			if event.is_action_pressed(key) \
-					and $Enemies.get_child(enemy_index).move(vectors[key]):
-				enemy_index += 1
+			if event.is_action_released(key) \
+					and enemy_list.front().move(vectors[key]):
+				enemy_list.pop_front()
 				remove_from_input_list(key)
-				return { "ui_right": 0, "ui_up": 0, "ui_left": 0, "ui_down": 0 }
+				statusline()
 
 
 func remove_from_input_list(key: String):
@@ -53,7 +52,7 @@ func remove_from_input_list(key: String):
 
 static func get_random_input_list(total: int) -> Dictionary:
 	var result = get_clean_input_list()
-	for i in range(total):
+	for _i in range(total):
 		result[result.keys()[randi() % 4]] += 1
 	for i in result.keys():
 		if result[i] == 0:
@@ -70,12 +69,17 @@ func _on_Main_next_turn():
 	if (score % 4 == 0):
 		$Spawner.add_enemy($Enemies, Enemy.instance())
 	score += 1
-	input_list = get_random_input_list($Enemies.get_child_count())
-	print("turn: " + String(score) + " input: " + String(input_list))
-	enemy_index = 0
+	input_list = get_random_input_list($Enemies.get_child_count() + 1)
+	statusline()
+	enemy_list = $Enemies.get_children()
 
 
 func _on_Main_attack():
+	attack = true
 	for enemy in $Enemies.get_children():
 		yield(enemy.attack(), "completed")
 	emit_signal("next_turn")
+	attack = not true
+
+func statusline():
+	print("turn: " + String(score) + " input: " + String(input_list))
