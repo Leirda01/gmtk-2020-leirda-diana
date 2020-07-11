@@ -7,9 +7,11 @@ export var tile_size = 24
 onready var ray = $RayCast2D
 onready var tween = $Tween
 
-func move(direction: Vector2):
+func move(direction: Vector2) -> bool:
 	if can_move(direction):
 		smoothly_move(direction)
+		return true
+	return false
 
 func can_move(direction: Vector2) -> bool:
 	ray.cast_to = direction * tile_size
