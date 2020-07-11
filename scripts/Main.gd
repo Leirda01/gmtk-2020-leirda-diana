@@ -9,13 +9,9 @@ const directions = {
 	"ui_down": Vector2.DOWN,
 }
 
-func _process(_delta):
-	pass
+func _ready():
+	play()
 
-func _unhandled_input(event):
-	if event.is_action_pressed("ui_select"):
-		$Spawner.add_enemy($Enemies, Enemy.instance())
-	for dir in directions.keys():
-		if event.is_action_pressed(dir):
-			$Enemies/Dummy.move(directions[dir])
-			$Enemies/Enemy.move(directions[dir])
+func play():
+	for enemy in $Enemies.get_children():
+		yield($Cursor.play_turn(enemy), "completed")
