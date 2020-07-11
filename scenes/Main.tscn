@@ -9,7 +9,7 @@
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [sub_resource type="TileSet" id=2]
-0/name = "environment.png 0"
+0/name = "block"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
@@ -43,3 +43,9 @@ tile_data = PoolIntArray( -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
 position = Vector2( 320, 64 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 448, 256 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 640, 128 )

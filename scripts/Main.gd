@@ -13,3 +13,5 @@ func _unhandled_input(event):
 	for dir in directions.keys():
 		if event.is_action_pressed(dir):
 			$Enemy.move(directions[dir])
+			$Enemy2.move(directions[dir])
+			$Enemy3.move(directions[dir])
