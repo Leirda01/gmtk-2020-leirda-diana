@@ -15,9 +15,15 @@ func hide_range():
 
 func attack():
 	yield(get_tree(), "idle_frame")
-	print("pausing...")
-	yield(get_tree().create_timer(1.0), "timeout")
-	print("resumed!")
+	var colliders = remove_item($Controller, $Range.get_overlapping_areas())
+	for collider in colliders:
+		if collider.has_method("die"):
+			collider.die()
+			return
 
-func die():
-	pass
+static func remove_item(item, list: Array):
+	var result := []
+	for element in list:
+		if not element == item:
+			result += [element]
+	return result

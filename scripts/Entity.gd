@@ -34,3 +34,6 @@ func smoothly_move(direction):
 	tween.interpolate_property(self, "position",
 		position, position + direction * tile_size, 1.0 / speed)
 	tween.start()
+
+func die():
+	print("ouch")

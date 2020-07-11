@@ -14,9 +14,11 @@ visible = false
 [node name="Shape" type="CollisionPolygon2D" parent="Range"]
 position = Vector2( 12, 12 )
 scale = Vector2( 1.2, 1.2 )
-polygon = PoolVector2Array( -10, -10, -10, -43.3333, 10, -43.3333, 10, -10, 50, -10, 50, 10, 10, 10, 10, 50, -10, 50, -10, 10, -50, 10, -50, -10 )
+polygon = PoolVector2Array( 10, -10, 50, -10, 50, 10, 10, 10, 10, 50, -10, 50, -10, 10, -50, 10, -50, -10, -10, -10, -10, -50, 10, -50 )
 
-[node name="Sprite" type="Sprite" parent="Range/Shape"]
+[node name="Sprite" type="Sprite" parent="Range"]
+position = Vector2( 12, 12 )
+scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 4 )
 
 [node name="Controller" parent="." instance=ExtResource( 2 )]
