@@ -15,6 +15,7 @@ func _ready():
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_select"):
 		$Player.random_move()
+#		$Spawner.add_enemy($Enemies, Enemy.instance())
 	for dir in directions.keys():
 		if event.is_action_pressed(dir):
 			$Enemies/Dummy.move(directions[dir])
