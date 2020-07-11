@@ -22,9 +22,10 @@ func _ready():
 	randomize()
 
 func _process(_delta):
-	if enemy_list.empty() and not attack:
+	if attack:
+		return
+	if enemy_list.empty():
 		emit_signal("attack")
-		enemy_list = $Enemies.get_children()
 	else:
 		for key in input_list.keys():
 			if enemy_list.front().get_node("Controller").can_move(vectors[key]):
