@@ -15,9 +15,9 @@ const directions = {
 func _process(_delta):
 	if enemy_index < $Enemies.get_child_count():
 		$Cursor.position = $Enemies \
-		.get_child(enemy_index) \
-		.get_node("Controller") \
-		.get_global_position()
+			.get_child(enemy_index) \
+			.get_node("Controller") \
+			.get_global_position()
 		return
 	# dis à la machine de calculer les attaques ici
 	$Player.random_move()
