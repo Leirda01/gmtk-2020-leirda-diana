@@ -70,6 +70,7 @@ func _on_Main_next_turn():
 	if (score % 4 == 0):
 		$Spawner.add_enemy($Enemies, Enemy.instance())
 	score += 1
+	$HUD.display_score(score, 0)
 	input_list = get_random_input_list($Enemies.get_child_count() + 1)
 	statusline()
 	enemy_list = $Enemies.get_children()
@@ -84,3 +85,4 @@ func _on_Main_attack():
 
 func statusline():
 	print("turn: " + String(score) + " input: " + String(input_list))
+	$HUD.display_input(input_list)
