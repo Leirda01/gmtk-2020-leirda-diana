@@ -2,7 +2,7 @@ extends Area2D
 
 
 export var speed = 15
-export var tile_size = 64
+export var tile_size = 24
 
 onready var ray = $RayCast2D
 onready var tween = $Tween

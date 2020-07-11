@@ -12,9 +12,10 @@ const directions = {
 func _process(_delta):
 	pass
 	# si tout les ennemis n’ont pas bougé:
+	# 	positionner le curseur
 	# 	return
-	# bouge le joueur
 	# dis au programme de s’occuper des attaques
+	# bouge le joueur
 
 func _input(event):
 	pass
