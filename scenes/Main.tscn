@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://sprites/environment.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Spawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Cursor.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scripts/Cursor.gd" type="Script" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -43,11 +41,6 @@ tile_set = SubResource( 2 )
 format = 1
 tile_data = PoolIntArray( 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 65536, 0, 0, 65553, 0, 0, 131072, 0, 0, 131089, 0, 0, 196608, 0, 0, 196620, 0, 0, 196625, 0, 0, 262144, 0, 0, 262155, 0, 0, 262156, 0, 0, 262161, 0, 0, 327680, 0, 0, 327697, 0, 0, 393216, 0, 0, 393233, 0, 0, 458752, 0, 0, 458763, 0, 0, 458769, 0, 0, 524288, 0, 0, 524291, 0, 0, 524298, 0, 0, 524299, 0, 0, 524305, 0, 0, 589824, 0, 0, 589841, 0, 0, 655360, 0, 0, 655377, 0, 0, 720896, 0, 0, 720906, 0, 0, 720913, 0, 0, 786432, 0, 0, 786434, 0, 0, 786435, 0, 0, 786449, 0, 0, 851968, 0, 0, 851985, 0, 0, 917504, 0, 0, 917521, 0, 0, 983040, 0, 0, 983057, 0, 0, 1048576, 0, 0, 1048593, 0, 0, 1114113, 0, 0, 1114114, 0, 0, 1114115, 0, 0, 1114116, 0, 0, 1114117, 0, 0, 1114118, 0, 0, 1114119, 0, 0, 1114120, 0, 0, 1114121, 0, 0, 1114122, 0, 0, 1114123, 0, 0, 1114124, 0, 0, 1114125, 0, 0, 1114126, 0, 0, 1114127, 0, 0, 1114128, 0, 0 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-
-[node name="Spawner" parent="." instance=ExtResource( 5 )]
-position = Vector2( 512, 448 )
-
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Dummy" parent="Enemies" instance=ExtResource( 4 )]
@@ -62,5 +55,7 @@ position = Vector2( 512, 128 )
 [node name="Dummy4" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( 256, 256 )
 
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
 [node name="Cursor" parent="." instance=ExtResource( 6 )]
-script = ExtResource( 7 )
+visible = false
