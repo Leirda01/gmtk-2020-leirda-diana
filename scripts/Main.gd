@@ -14,10 +14,7 @@ const directions = {
 
 func _process(_delta):
 	if enemy_index < $Enemies.get_child_count():
-		$Cursor.position = $Enemies \
-			.get_child(enemy_index) \
-			.get_node("Controller") \
-			.get_global_position()
+		$Cursor.hilight($Enemies.get_child(enemy_index))
 		return
 	# dis à la machine de calculer les attaques ici
 	$Player.random_move()
@@ -25,12 +22,12 @@ func _process(_delta):
 		$Spawner.add_enemy($Enemies, Enemy.instance())
 	enemy_index = 0
 	score += 1
+	print(score)
 
 func _input(event):
-	if enemy_index <= $Enemies.get_child_count():
+	if enemy_index < $Enemies.get_child_count():
 		for key in directions.keys():
 			if event.is_action_pressed(key):
 				enemy_index += int($Enemies \
 					.get_child(enemy_index) \
-					.get_node("Controller") \
 					.move(directions[key]))
