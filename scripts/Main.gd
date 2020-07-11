@@ -37,7 +37,6 @@ func _on_Main_next_turn():
 	if (score % 4 == 0):
 		$Spawner.add_enemy($Enemies, Enemy.instance())
 	score += 1
-	print(score)
 	enemy_index = 0
 
 

@@ -1,5 +1,6 @@
 extends Area2D
 
+signal game_over
 
 func random_move():
 	var directions = available_directions()
@@ -14,4 +15,4 @@ func available_directions():
 	return available_directions
 
 func lose():
-	print("la partie est perdu!")
+	emit_signal("game_over")
