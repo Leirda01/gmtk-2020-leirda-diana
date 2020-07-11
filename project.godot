@@ -20,8 +20,8 @@ run/main_scene="res://scenes/Main.tscn"
 
 [display]
 
-window/size/width=576
-window/size/height=384
+window/size/width=480
+window/size/height=270
 window/size/resizable=false
 
 [rendering]
