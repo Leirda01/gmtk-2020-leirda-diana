@@ -18,17 +18,26 @@ script = ExtResource( 3 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 230, 134 )
 
-[node name="Spawner" parent="." instance=ExtResource( 5 )]
-position = Vector2( 14, 158 )
-
 [node name="Cursor" parent="." instance=ExtResource( 6 )]
 visible = false
 script = ExtResource( 7 )
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
+visible = false
 margin_left = 414.0
 margin_top = 72.0
 margin_right = 414.0
 margin_bottom = 72.0
+
+[node name="Spawners" type="Node" parent="."]
+
+[node name="Right" parent="Spawners" instance=ExtResource( 5 )]
+position = Vector2( 374, 134 )
+
+[node name="Up" parent="Spawners" instance=ExtResource( 5 )]
+position = Vector2( 182, 14 )
+
+[node name="Left" parent="Spawners" instance=ExtResource( 5 )]
+position = Vector2( 14, 158 )
 [connection signal="attack" from="." to="." method="_on_Main_attack"]
 [connection signal="next_turn" from="." to="." method="_on_Main_next_turn"]

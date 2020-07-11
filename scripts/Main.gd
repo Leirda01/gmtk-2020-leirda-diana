@@ -18,8 +18,10 @@ const vectors = {
 onready var enemy_list: = $Enemies.get_children()
 onready var input_list: Dictionary
 
+
 func _ready():
 	randomize()
+
 
 func _process(_delta):
 	if attack:
@@ -35,11 +37,11 @@ func _process(_delta):
 		$Cursor.hide()
 		enemy_list.pop_front()
 
+
 func _input(event):
 	if not enemy_list.empty():
 		for key in input_list.keys():
-			if event.is_action_released(key) \
-					and enemy_list.front().move(vectors[key]):
+			if event.is_action_released(key) and enemy_list.front().move(vectors[key]):
 				enemy_list.pop_front()
 				remove_from_input_list(key)
 				statusline()
@@ -68,7 +70,11 @@ func _on_Main_next_turn():
 	$Cursor.hide()
 	$Player.random_move()
 	if (score % 4 == 0):
-		$Spawner.add_enemy($Enemies, Enemy.instance())
+		$Spawners/Left.add_enemy($Enemies, Enemy.instance())
+	if (score % 5 == 0):
+		$Spawners/Up.add_enemy($Enemies, Enemy.instance())
+	if (score % 3 == 2):
+		$Spawners/Right.add_enemy($Enemies, Enemy.instance())
 	score += 1
 	$HUD.display_score(score, 0)
 	input_list = get_random_input_list($Enemies.get_child_count() + 1)
@@ -82,6 +88,7 @@ func _on_Main_attack():
 		yield(enemy.attack(), "completed")
 	emit_signal("next_turn")
 	attack = not true
+
 
 func statusline():
 	print("turn: " + String(score) + " input: " + String(input_list))
