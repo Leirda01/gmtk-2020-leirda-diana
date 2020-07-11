@@ -13,3 +13,6 @@ layer = -128
 [node name="Sprite" type="Sprite" parent="CanvasLayer"]
 texture = ExtResource( 1 )
 centered = false
+__meta__ = {
+"_edit_lock_": true
+}

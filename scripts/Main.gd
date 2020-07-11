@@ -15,17 +15,21 @@ const vectors = {
 	"ui_down": Vector2.DOWN,
 }
 
-var input_list = {
-	"ui_right": 1,
-	"ui_up": 1,
-	"ui_left": 1,
-	"ui_down": 1,
-}
+onready var input_list : Dictionary
+
+func _ready():
+	randomize()
 
 func _process(_delta):
+		
 	if enemy_index < $Enemies.get_child_count():
 		$Cursor.hilight($Enemies.get_child(enemy_index))
-		return
+		for key in input_list.keys():
+			if $Enemies.get_child(enemy_index) \
+			.get_node("Controller") \
+			.can_move(vectors[key]):
+				return
+			emit_signal("next_turn")
 	if enemy_index == $Enemies.get_child_count():
 		$Cursor.set_visible(false)
 		emit_signal("attack")
@@ -33,11 +37,32 @@ func _process(_delta):
 
 func _input(event):
 	if enemy_index < $Enemies.get_child_count():
-		for key in vectors.keys():
-			if event.is_action_pressed(key):
-				enemy_index += int($Enemies \
-					.get_child(enemy_index) \
-					.move(vectors[key]))
+		for key in input_list.keys():
+			if event.is_action_pressed(key) \
+					and $Enemies.get_child(enemy_index).move(vectors[key]):
+				enemy_index += 1
+				remove_from_input_list(key)
+				print(input_list)
+
+
+func remove_from_input_list(key: String):
+	input_list[key] -= 1
+	if input_list[key] == 0:
+		input_list.erase(key)
+
+
+static func get_random_input_list(total: int) -> Dictionary:
+	var result = get_clean_input_list()
+	for i in range(total):
+		result[result.keys()[randi() % 4]] += 1
+	for i in result.keys():
+		if result[i] == 0:
+			result.erase(i)
+	return result
+
+static func get_clean_input_list() -> Dictionary:
+	return { "ui_right": 0, "ui_up": 0, "ui_left": 0, "ui_down": 0 }
+
 
 func _on_Main_next_turn():
 	$Player.random_move()
@@ -45,6 +70,7 @@ func _on_Main_next_turn():
 		$Spawner.add_enemy($Enemies, Enemy.instance())
 	score += 1
 	input_list = get_random_input_list($Enemies.get_child_count())
+	print(input_list)
 	enemy_index = 0
 
 
@@ -52,16 +78,3 @@ func _on_Main_attack():
 	for enemy in $Enemies.get_children():
 		yield(enemy.attack(), "completed")
 	emit_signal("next_turn")
-
-
-static func get_random_input_list(total: int):
-	var result = {
-		"ui_right": 0,
-		"ui_up": 0,
-		"ui_left": 0,
-		"ui_down": 0,
-	}
-	for iterator in range(total):
-		result[["ui_right", "ui_up", "ui_left", "ui_down"][randi() % 4]] += 1
-
-	return result
