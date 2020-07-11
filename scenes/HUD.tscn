@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/HUD.gd" type="Script" id=1]
+[ext_resource path="res://font/munro_small.tres" type="DynamicFont" id=2]
 
 [node name="HUD" type="Control"]
 script = ExtResource( 1 )
@@ -20,66 +21,47 @@ margin_bottom = 104.0
 
 [node name="VBox" type="VBoxContainer" parent="HBox"]
 margin_left = 4.0
-margin_right = 56.0
+margin_right = 4.0
 margin_bottom = 104.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ScoreContainer" type="VBoxContainer" parent="HBox/VBox"]
-margin_right = 52.0
-margin_bottom = 32.0
+margin_bottom = 4.0
 
-[node name="HighScore" type="Label" parent="HBox/VBox/ScoreContainer"]
-margin_right = 52.0
-margin_bottom = 14.0
+[node name="HighScore" type="RichTextLabel" parent="HBox/VBox/ScoreContainer"]
 text = "hi-score"
 
-[node name="Score" type="Label" parent="HBox/VBox/ScoreContainer"]
-margin_top = 18.0
-margin_right = 52.0
-margin_bottom = 32.0
+[node name="Score" type="RichTextLabel" parent="HBox/VBox/ScoreContainer"]
+margin_top = 4.0
+margin_bottom = 4.0
 text = "score"
 
 [node name="InputContainer" type="VBoxContainer" parent="HBox/VBox"]
-margin_top = 36.0
-margin_right = 52.0
-margin_bottom = 104.0
+margin_top = 8.0
+margin_bottom = 20.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="right" type="Label" parent="HBox/VBox/InputContainer"]
-margin_right = 52.0
-margin_bottom = 14.0
+[node name="right" type="RichTextLabel" parent="HBox/VBox/InputContainer"]
 text = "right"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="up" type="Label" parent="HBox/VBox/InputContainer"]
-margin_top = 18.0
-margin_right = 52.0
-margin_bottom = 32.0
+[node name="up" type="RichTextLabel" parent="HBox/VBox/InputContainer"]
+margin_top = 4.0
+margin_bottom = 4.0
 text = "up"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="left" type="Label" parent="HBox/VBox/InputContainer"]
-margin_top = 36.0
-margin_right = 52.0
-margin_bottom = 50.0
-text = "left"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="left" type="RichTextLabel" parent="HBox/VBox/InputContainer"]
+margin_top = 8.0
+margin_bottom = 8.0
+custom_fonts/bold_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[b]{text}[/b]"
+text = "{text}"
 
-[node name="down" type="Label" parent="HBox/VBox/InputContainer"]
-margin_top = 54.0
-margin_right = 52.0
-margin_bottom = 68.0
+[node name="down" type="RichTextLabel" parent="HBox/VBox/InputContainer"]
+margin_top = 12.0
+margin_bottom = 12.0
 text = "down"
-__meta__ = {
-"_edit_use_anchors_": false
-}
