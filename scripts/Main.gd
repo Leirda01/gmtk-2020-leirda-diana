@@ -1,6 +1,6 @@
 extends Node
 
-const Enemy = preload("res://scenes/Enemy.tscn")
+const Enemy = preload("res://scenes/enemies/Bald.tscn")
 
 signal attack
 signal next_turn
