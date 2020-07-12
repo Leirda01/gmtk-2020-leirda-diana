@@ -8,5 +8,6 @@ func add_enemy(parent: Object, object: Object):
 		parent.add_child(object)
 		can_spawn = false
 
-func _on_Spawner_area_exited(area):
+
+func _on_Spawner_body_exited(body):
 	can_spawn = true

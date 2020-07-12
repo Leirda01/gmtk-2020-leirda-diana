@@ -26,16 +26,11 @@ position = Vector2( 182, 14 )
 [node name="Left" parent="Spawners" instance=ExtResource( 5 )]
 position = Vector2( 14, 158 )
 
+[node name="Enemy" parent="." instance=ExtResource( 8 )]
+visible = false
+position = Vector2( 206, 134 )
+
 [node name="Enemies" type="Node" parent="."]
-
-[node name="Dummy" parent="Enemies" instance=ExtResource( 8 )]
-position = Vector2( 86, 158 )
-
-[node name="Second" parent="Enemies" instance=ExtResource( 8 )]
-position = Vector2( 86, 38 )
-
-[node name="Third" parent="Enemies" instance=ExtResource( 8 )]
-position = Vector2( 158, 38 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 230, 134 )

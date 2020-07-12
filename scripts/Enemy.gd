@@ -36,7 +36,6 @@ func jump():
 func die():
 	print(self.name, ": ouch!")
 	yield(get_tree(), "idle_frame")
-	for _i in range(4):
-		yield(get_tree().create_timer(0.5), "timeout")
+	for _i in range(10):
+		yield(get_tree().create_timer(0.1), "timeout")
 		set_visible(not visible)
-	self.queue_free()
