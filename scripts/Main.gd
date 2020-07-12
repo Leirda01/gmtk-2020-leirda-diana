@@ -1,6 +1,13 @@
 extends Node
 
-const Enemy = preload("res://scenes/enemies/Bald.tscn")
+const Enemies = [
+	preload("res://scenes/enemies/Bald.tscn"),
+	preload("res://scenes/enemies/Bazooka.tscn"),
+	preload("res://scenes/enemies/Blond.tscn"),
+	preload("res://scenes/enemies/Brown.tscn"),
+	preload("res://scenes/enemies/Redhead.tscn"),
+	preload("res://scenes/enemies/Shield.tscn"),
+]
 
 signal attack
 signal next_turn
@@ -43,7 +50,7 @@ func _input(event):
 			if event.is_action_released(key) and enemy_list.front().move(vectors[key]):
 				enemy_list.pop_front()
 				remove_from_input_list(key)
-				statusline()
+				$HUD.display_input(input_list)
 
 
 func remove_from_input_list(key: String):
@@ -68,16 +75,14 @@ static func get_clean_input_list() -> Dictionary:
 
 func _on_Main_next_turn():
 	$Player.random_move()
-	if (score % 4 == 0):
-		$Spawners/Left.add_enemy($Enemies, Enemy.instance())
-	if (score % 5 == 0):
-		$Spawners/Up.add_enemy($Enemies, Enemy.instance())
-	if (score % 3 == 2):
-		$Spawners/Right.add_enemy($Enemies, Enemy.instance())
+	if (score % 3 == 0):
+		$Spawners/Left.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
+		$Spawners/Up.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
+		$Spawners/Right.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
 	score += 1
 	$HUD.display_score(score, 0)
 	input_list = get_random_input_list($Enemies.get_child_count() + 1)
-	statusline()
+	$HUD.display_input(input_list)
 	enemy_list = $Enemies.get_children()
 	attack = not true
 
@@ -89,13 +94,8 @@ func _on_Main_attack():
 	var idx = 0
 	while idx < $Enemies.get_child_count():
 		for entity in yield($Enemies.get_child(idx).attack(), "completed"):
-			if entity.get_owner().has_method("die"):
+			if entity.get_owner().has_method("take_damage"):
 				grave.push_front(entity)
-				yield(entity.get_owner().call("die"), "completed")
+				yield(entity.get_owner().call("take_damage"), "completed")
 		idx += 1
 	emit_signal("next_turn")
-
-
-func statusline():
-	print("turn: " + String(score) + " input: " + String(input_list))
-	$HUD.display_input(input_list)
