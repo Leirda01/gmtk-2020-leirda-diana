@@ -11,8 +11,10 @@ const Enemies = [
 
 signal attack
 signal next_turn
+signal game_over
 
 var score: = 0
+var hiscore: = 0
 var attack: = false
 
 const vectors = {
@@ -74,12 +76,13 @@ static func get_clean_input_list() -> Dictionary:
 
 func _on_Main_next_turn():
 	$Player.random_move()
-	if (score % 3 == 0):
-		$Spawners/Left.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
+	if (score % 2 == 0):
+		$Spawners/Center.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
 		$Spawners/Up.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
-		$Spawners/Right.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
+		$Spawners/Down.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
+		$Spawners/Left.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
 	score += 1
-	$HUD.display_score(score, 0)
+	$HUD.display_score(score, hiscore)
 	input_list = get_random_input_list($Enemies.get_child_count() + 1)
 	$HUD.display_input(input_list)
 	enemy_list = $Enemies.get_children()
@@ -97,7 +100,23 @@ func _on_Main_attack():
 				grave.push_front(entity.get_owner())
 				yield(entity.get_owner().call("take_damage"), "completed")
 		idx += 1
+	yield(get_tree().create_timer(1), "timeout")
 	for dead in grave:
 		dead.die()
 		$Enemies.remove_child(dead)
+		if dead.name == "Player":
+			emit_signal("game_over")
+			return
+	emit_signal("next_turn")
+
+
+func _on_Main_game_over():
+	if score > hiscore:
+		hiscore = score
+	score = 0
+	for enemy in $Enemies.get_children():
+		enemy.queue_free()
+		$Enemies.remove_child(enemy)
+	yield(get_tree().create_timer(3.0), "timeout")
+	$Player.initialize(Vector2(230, 134))
 	emit_signal("next_turn")

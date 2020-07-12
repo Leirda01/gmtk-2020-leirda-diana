@@ -10,18 +10,23 @@
 script = ExtResource( 3 )
 
 [node name="World" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 1 )
 
 [node name="Spawners" type="Node" parent="."]
 
-[node name="Right" parent="Spawners" instance=ExtResource( 5 )]
-position = Vector2( 374, 134 )
+[node name="Center" parent="Spawners" instance=ExtResource( 5 )]
+position = Vector2( 158, 134 )
 
 [node name="Up" parent="Spawners" instance=ExtResource( 5 )]
 position = Vector2( 182, 14 )
 
+[node name="Down" parent="Spawners" instance=ExtResource( 5 )]
+position = Vector2( 278, 158 )
+
 [node name="Left" parent="Spawners" instance=ExtResource( 5 )]
-position = Vector2( 14, 158 )
+position = Vector2( 86, 14 )
+
+[node name="Right" parent="Spawners" instance=ExtResource( 5 )]
+position = Vector2( 350, 62 )
 
 [node name="Enemies" type="Node" parent="."]
 
@@ -34,4 +39,5 @@ margin_top = 6.0
 margin_right = 408.0
 margin_bottom = 6.0
 [connection signal="attack" from="." to="." method="_on_Main_attack"]
+[connection signal="game_over" from="." to="." method="_on_Main_game_over"]
 [connection signal="next_turn" from="." to="." method="_on_Main_next_turn"]
