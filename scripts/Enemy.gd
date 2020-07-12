@@ -23,7 +23,7 @@ func attack() -> Array:
 	yield(jump(), "completed")
 	for direction in ranges:
 		var collider = $Controller.collider(direction)
-		if not collider == $Controller:
+		if collider:
 			colliders.push_front(collider)
 	return colliders
 
@@ -34,5 +34,9 @@ func jump():
 	$Controller.position += 12 * Vector2.DOWN
 
 func die():
-	print(self)
-	print("ouch!")
+	print(self.name, ": ouch!")
+	yield(get_tree(), "idle_frame")
+	for _i in range(4):
+		yield(get_tree().create_timer(0.5), "timeout")
+		set_visible(not visible)
+	self.queue_free()

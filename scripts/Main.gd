@@ -68,12 +68,12 @@ static func get_clean_input_list() -> Dictionary:
 
 func _on_Main_next_turn():
 	$Player.random_move()
-	if (score % 4 == 0):
-		$Spawners/Left.add_enemy($Enemies, Enemy.instance())
-	if (score % 5 == 0):
-		$Spawners/Up.add_enemy($Enemies, Enemy.instance())
-	if (score % 3 == 2):
-		$Spawners/Right.add_enemy($Enemies, Enemy.instance())
+#	if (score % 4 == 0):
+#		$Spawners/Left.add_enemy($Enemies, Enemy.instance())
+#	if (score % 5 == 0):
+#		$Spawners/Up.add_enemy($Enemies, Enemy.instance())
+#	if (score % 3 == 2):
+#		$Spawners/Right.add_enemy($Enemies, Enemy.instance())
 	score += 1
 	$HUD.display_score(score, 0)
 	input_list = get_random_input_list($Enemies.get_child_count() + 1)
@@ -84,9 +84,15 @@ func _on_Main_next_turn():
 func _on_Main_attack():
 	attack = true
 	$Cursor.hide()
-	for enemy in $Enemies.get_children():
-		for entity in yield(enemy.attack(), "completed"):
-			pass
+	var idx = 0
+	while idx < $Enemies.get_child_count():
+		for entity in yield($Enemies.get_child(idx).attack(), "completed"):
+			if entity.get_owner().has_method("die"):
+				print(entity.get_owner().name, ": ", $Enemies.get_child(idx).name)
+				yield(entity.get_owner().call("die"), "completed")
+				idx -= 1
+		print("next")
+		idx += 1
 	emit_signal("next_turn")
 	attack = not true
 
