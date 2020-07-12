@@ -50,6 +50,7 @@ func _input(event):
 		for key in input_list.keys():
 			if event.is_action_released(key) and enemy_list.front().move(vectors[key]):
 				enemy_list.pop_front().hide_range()
+				$Enemies.sort()
 				remove_from_input_list(key)
 				$HUD.display_input(input_list)
 
@@ -81,6 +82,7 @@ func _on_Main_next_turn():
 		$Spawners/Up.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
 		$Spawners/Down.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
 		$Spawners/Left.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
+		$Enemies.sort()
 	score += 1
 	$HUD.display_score(score, hiscore)
 	input_list = get_random_input_list($Enemies.get_child_count() + 1)
@@ -97,7 +99,7 @@ func _on_Main_attack():
 		for entity in yield($Enemies.get_child(idx).attack(), "completed"):
 			if entity.get_owner().has_method("take_damage"):
 				yield($Enemies.get_child(idx).jump(
-					$Enemies.get_child(idx).global_position.angle_to(entity.global_position)
+					$Enemies.get_child(idx).get_node("Controller").global_position.angle_to(entity.global_position)
 				), "completed")
 				grave.push_front(entity.get_owner())
 				yield(entity.get_owner().call("take_damage"), "completed")

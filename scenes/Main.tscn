@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/World.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=3]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Spawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/Enemies.gd" type="Script" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 3 )
@@ -28,7 +29,8 @@ position = Vector2( 86, 14 )
 [node name="Right" parent="Spawners" instance=ExtResource( 5 )]
 position = Vector2( 350, 62 )
 
-[node name="Enemies" type="Node" parent="."]
+[node name="Enemies" type="YSort" parent="."]
+script = ExtResource( 6 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 230, 134 )
