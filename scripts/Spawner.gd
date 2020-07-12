@@ -4,7 +4,7 @@ var can_spawn: = true
 
 func add_enemy(parent: Object, object: Object):
 	if can_spawn:
-		object.position = self.position
+		object.get_node("Controller").position = self.position
 		parent.add_child(object)
 		can_spawn = false
 

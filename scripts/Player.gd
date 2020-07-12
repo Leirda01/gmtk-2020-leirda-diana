@@ -1,6 +1,7 @@
-extends Area2D
+extends Node
 
-signal game_over
+const ranges = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
+
 
 func random_move():
 	var directions = available_directions()
@@ -8,11 +9,8 @@ func random_move():
 		$Controller.move(directions[randi() % directions.size()])
 
 func available_directions():
-	var available_directions = []
-	for direction in [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]:
+	var available_directions: = []
+	for direction in ranges:
 		if $Controller.can_move(direction):
 			available_directions += [direction]
 	return available_directions
-
-func lose():
-	emit_signal("game_over")

@@ -34,7 +34,6 @@ func _process(_delta):
 				$Cursor.hilight(enemy_list.front())
 				return
 		print("SKIP")
-		$Cursor.hide()
 		enemy_list.pop_front()
 
 
@@ -62,12 +61,12 @@ static func get_random_input_list(total: int) -> Dictionary:
 			result.erase(i)
 	return result
 
+
 static func get_clean_input_list() -> Dictionary:
 	return { "ui_right": 0, "ui_up": 0, "ui_left": 0, "ui_down": 0 }
 
 
 func _on_Main_next_turn():
-	$Cursor.hide()
 	$Player.random_move()
 	if (score % 4 == 0):
 		$Spawners/Left.add_enemy($Enemies, Enemy.instance())
@@ -84,8 +83,10 @@ func _on_Main_next_turn():
 
 func _on_Main_attack():
 	attack = true
+	$Cursor.hide()
 	for enemy in $Enemies.get_children():
-		yield(enemy.attack(), "completed")
+		for entity in yield(enemy.attack(), "completed"):
+			pass
 	emit_signal("next_turn")
 	attack = not true
 

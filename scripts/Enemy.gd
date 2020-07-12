@@ -1,32 +1,38 @@
-extends Node2D
+extends Position2D
 
-signal has_attacked
+
+const ranges: Array = [	2 * Vector2.RIGHT,
+						2 * Vector2.UP,
+						2 * Vector2.LEFT,
+						2 * Vector2.DOWN,
+						]
+
 
 func move(direction: Vector2):
-	hide_range()
 	return $Controller.move(direction)
-
-func show_range():
-	$Range.visible = true
 
 func hide_range():
 	$Range.visible = false
 
-func attack():
-	yield(get_tree(), "idle_frame")
-	var colliders = remove_item($Controller, $Range.get_overlapping_areas())
-	for collider in colliders:
-		if collider.has_method("lose"):
-			collider.lose()
-			return
-	for collider in colliders:
-		if collider.has_method("die"):
-			collider.die()
-			return
+func show_range():
+	$Range.visible = true
 
-static func remove_item(item, list: Array):
-	var result := []
-	for element in list:
-		if not element == item:
-			result += [element]
-	return result
+func attack() -> Array:
+	yield(get_tree(), "idle_frame")
+	var colliders: = []
+	yield(jump(), "completed")
+	for direction in ranges:
+		var collider = $Controller.collider(direction)
+		if not collider == $Controller:
+			colliders.push_front(collider)
+	return colliders
+
+
+func jump():
+	$Controller.position += 12 * Vector2.UP
+	yield(get_tree().create_timer(1.0), "timeout")
+	$Controller.position += 12 * Vector2.DOWN
+
+func die():
+	print(self)
+	print("ouch!")

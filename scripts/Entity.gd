@@ -27,6 +27,11 @@ func can_move(direction: Vector2) -> bool:
 		ray.clear_exceptions()
 	return false
 
+func collider(direction: Vector2) -> Object:
+	ray.cast_to = direction * tile_size
+	ray.force_raycast_update()
+	return ray.get_collider()
+
 func smoothly_move(direction):
 	if tween.is_active():
 		return false

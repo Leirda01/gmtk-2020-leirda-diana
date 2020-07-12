@@ -3,6 +3,7 @@ extends Node2D
 var last_object: Object
 
 func hilight(object):
+	hide()
 	last_object = object
 	position = object.get_node("Controller").global_position
 	set_visible(true)
