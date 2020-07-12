@@ -30,7 +30,7 @@ position = Vector2( 86, 14 )
 [node name="Right" parent="Spawners" instance=ExtResource( 5 )]
 position = Vector2( 350, 62 )
 
-[node name="Enemies" type="YSort" parent="."]
+[node name="Enemies" type="Node" parent="."]
 script = ExtResource( 6 )
 
 [node name="HideSeek" type="Node" parent="Enemies"]

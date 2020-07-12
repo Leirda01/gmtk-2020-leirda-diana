@@ -9,6 +9,8 @@ const Enemies = [
 	preload("res://scenes/enemies/Shield.tscn"),
 ]
 
+const Spawner = preload("res://scenes/Spawner.tscn")
+
 signal attack
 signal next_turn
 signal game_over
@@ -77,12 +79,11 @@ static func get_clean_input_list() -> Dictionary:
 
 func _on_Main_next_turn():
 	$Enemies/HideSeek/Player.random_move()
-	if (score % 2 == 0):
-		$Spawners/Center.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
-		$Spawners/Up.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
-		$Spawners/Down.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
-		$Spawners/Left.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
-		$Enemies.sort()
+	var coucou = Spawner.instance()
+	for i in range(score / 15 + 4):
+		coucou.position = get_random_free_position()
+		coucou.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
+	$Enemies.sort()
 	score += 1
 	$HUD.display_score(score, hiscore)
 	input_list = get_random_input_list($Enemies.get_child_count() + 1)
@@ -90,6 +91,14 @@ func _on_Main_next_turn():
 	enemy_list = $Enemies.get_children()
 	attack = not true
 
+
+func get_random_free_position():
+	while true:
+		var guess: = Vector2(randi() % 16 * 24 + 14, randi() % 9 * 24 + 14)
+		for item in $Enemies.get_children():
+			if item.get_node("Controller").position == guess:
+				break
+		return guess
 
 func _on_Main_attack():
 	var grave: = []

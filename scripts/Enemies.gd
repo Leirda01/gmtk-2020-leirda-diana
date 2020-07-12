@@ -1,4 +1,4 @@
-extends YSort
+extends Node
 
 func sort():
 	var sorted = get_children()

@@ -32,9 +32,11 @@ func attack() -> Array:
 
 func jump(direction: float):
 	$Controller.position += 2 * Vector2.UP
+	$Range.visible = true
 	animate_attack(direction)
-	yield(get_tree().create_timer(0.1), "timeout")
+	yield(get_tree().create_timer(1.0), "timeout")
 	$Controller.position += 2 * Vector2.DOWN
+	$Range.visible = false
 
 
 func take_damage():
@@ -46,11 +48,7 @@ func take_damage():
 
 
 func animate_attack(phi: float):
-	$Controller/Attack.rotation_degrees = rad2deg(phi)
-	$Controller/Attack.set_visible(true)
-	$Controller/Attack.play("default")
-	yield($Controller/Attack, "animation_finished")
-	$Controller/Attack.set_visible(false)
+	pass
 
 func die():
 	queue_free()

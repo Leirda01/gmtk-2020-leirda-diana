@@ -51,19 +51,15 @@ func show_available_directions(dirs: Array):
 			"ui_right":
 				if self.can_move(Vector2.LEFT):
 					$Right.set_visible(true)
-					continue
 			"ui_up":
 				if self.can_move(Vector2.UP):
 					$Up.set_visible(true)
-					continue
 			"ui_left":
 				if self.can_move(Vector2.LEFT):
 					$Left.set_visible(true)
-					continue
 			"ui_down":
 				if self.can_move(Vector2.DOWN):
 					$Down.set_visible(true)
-					continue
 
 
 func hide_directions():
