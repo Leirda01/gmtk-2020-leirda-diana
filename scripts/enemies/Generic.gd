@@ -32,3 +32,4 @@ func die():
 	for _i in range(10):
 		yield(get_tree().create_timer(0.1), "timeout")
 		set_visible(not visible)
+	$Controller/AnimatedSprite.play("red")
