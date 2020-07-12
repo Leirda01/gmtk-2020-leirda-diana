@@ -79,20 +79,21 @@ func _on_Main_next_turn():
 	input_list = get_random_input_list($Enemies.get_child_count() + 1)
 	statusline()
 	enemy_list = $Enemies.get_children()
+	attack = not true
 
 
 func _on_Main_attack():
+	var grave: = []
 	attack = true
 	$Cursor.hide()
 	var idx = 0
 	while idx < $Enemies.get_child_count():
 		for entity in yield($Enemies.get_child(idx).attack(), "completed"):
 			if entity.get_owner().has_method("die"):
-				print(entity.get_owner().name, ": ", $Enemies.get_child(idx).name)
+				grave.push_front(entity)
 				yield(entity.get_owner().call("die"), "completed")
 		idx += 1
 	emit_signal("next_turn")
-	attack = not true
 
 
 func statusline():
