@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://sprites/enemies/bald/normal.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Generic.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Entity.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sprites/enemies/ranges/3.png" type="Texture" id=4]
+[ext_resource path="res://sprites/enemies/bald/effect-adjacent.png" type="Texture" id=5]
 [ext_resource path="res://sprites/enemies/bald/red.png" type="Texture" id=6]
-
+[ext_resource path="res://sprites/enemies/bald/effect-diagonal.png" type="Texture" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -18,6 +19,75 @@ animations = [ {
 "loop": true,
 "name": "normal",
 "speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 7 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 7 )
+region = Rect2( 48, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 7 )
+region = Rect2( 72, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 7 )
+region = Rect2( 96, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 7 )
+region = Rect2( 120, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 7 )
+region = Rect2( 144, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 5 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 5 )
+region = Rect2( 48, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 5 )
+region = Rect2( 72, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 5 )
+region = Rect2( 96, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 5 )
+region = Rect2( 120, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 5 )
+region = Rect2( 144, 0, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=16]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": false,
+"name": "diagonal",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": false,
+"name": "adjacent",
+"speed": 20.0
 } ]
 
 [node name="Bald" type="Position2D"]
@@ -42,3 +112,15 @@ offset = Vector2( 0, -11 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Controller"]
 remote_path = NodePath("../../Range")
+
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Controller"]
+remote_path = NodePath("../Effect/Attack")
+
+[node name="Effect" type="CanvasLayer" parent="Controller"]
+layer = 128
+
+[node name="Attack" type="AnimatedSprite" parent="Controller/Effect"]
+visible = false
+frames = SubResource( 16 )
+animation = "adjacent"
+offset = Vector2( 24, 0 )

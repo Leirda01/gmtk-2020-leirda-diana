@@ -28,10 +28,11 @@ func attack() -> Array:
 	return colliders
 
 
-func jump():
-	$Controller.position += 12 * Vector2.UP
+func jump(direction: float):
+	#$Controller.position += 12 * Vector2.UP
+	animate_attack(direction)
 	yield(get_tree().create_timer(1.0), "timeout")
-	$Controller.position += 12 * Vector2.DOWN
+	#$Controller.position += 12 * Vector2.DOWN
 
 
 func take_damage():
@@ -41,6 +42,14 @@ func take_damage():
 		set_visible(not visible)
 	$Controller/AnimatedSprite.play("red")
 
+
+func animate_attack(direction: float):
+	$Controller/Effect/Attack.rotation_degrees = rad2deg(direction)
+	print($Controller/Effect/Attack.rotation_degrees)
+	$Controller/Effect/Attack.set_visible(true)
+	$Controller/Effect/Attack.play("default")
+	yield($Controller/Effect/Attack, "animation_finished")
+	$Controller/Effect/Attack.set_visible(false)
 
 func die():
 	queue_free()

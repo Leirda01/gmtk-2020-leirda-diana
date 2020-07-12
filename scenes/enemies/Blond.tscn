@@ -51,9 +51,9 @@ region = Rect2( 144, 0, 24, 24 )
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
+"loop": false,
 "name": "default",
-"speed": 5.0
+"speed": 20.0
 } ]
 
 [node name="Blond" type="Position2D"]
@@ -79,6 +79,13 @@ offset = Vector2( 0, -11 )
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Controller"]
 remote_path = NodePath("../../Range")
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Controller"]
+remote_path = NodePath("../Effect/Attack")
+
+[node name="Effect" type="CanvasLayer" parent="Controller"]
+layer = 128
+
+[node name="Attack" type="AnimatedSprite" parent="Controller/Effect"]
+visible = false
 frames = SubResource( 9 )
-animation = "New Anim"
+offset = Vector2( 24, 0 )

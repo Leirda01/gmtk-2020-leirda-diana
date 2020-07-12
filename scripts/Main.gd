@@ -96,7 +96,9 @@ func _on_Main_attack():
 	while idx < $Enemies.get_child_count():
 		for entity in yield($Enemies.get_child(idx).attack(), "completed"):
 			if entity.get_owner().has_method("take_damage"):
-				yield($Enemies.get_child(idx).jump(), "completed")
+				yield($Enemies.get_child(idx).jump(
+					$Enemies.get_child(idx).position.angle_to(entity.position)
+				), "completed")
 				grave.push_front(entity.get_owner())
 				yield(entity.get_owner().call("take_damage"), "completed")
 		idx += 1
@@ -114,9 +116,9 @@ func _on_Main_game_over():
 	if score > hiscore:
 		hiscore = score
 	score = 0
+	yield(get_tree().create_timer(3.0), "timeout")
 	for enemy in $Enemies.get_children():
 		enemy.queue_free()
 		$Enemies.remove_child(enemy)
-	yield(get_tree().create_timer(3.0), "timeout")
 	$Player.initialize(Vector2(230, 134))
 	emit_signal("next_turn")

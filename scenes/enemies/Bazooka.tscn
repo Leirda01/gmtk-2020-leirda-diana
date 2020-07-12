@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://sprites/enemies/bazooka/red.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Generic.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Entity.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sprites/enemies/bazooka/normal.png" type="Texture" id=4]
 [ext_resource path="res://sprites/enemies/ranges/4.png" type="Texture" id=5]
-
+[ext_resource path="res://sprites/enemies/bazooka/effect.png" type="Texture" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -18,6 +18,46 @@ animations = [ {
 "loop": false,
 "name": "normal",
 "speed": 0.0
+} ]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 6 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 6 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 6 )
+region = Rect2( 144, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 6 )
+region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 6 )
+region = Rect2( 240, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 6 )
+region = Rect2( 288, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 6 )
+region = Rect2( 336, 0, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "default",
+"speed": 20.0
 } ]
 
 [node name="Bazooka" type="Position2D"]
@@ -42,3 +82,15 @@ offset = Vector2( -3, -12 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Controller"]
 remote_path = NodePath("../../Range")
+
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Controller"]
+remote_path = NodePath("../Effect/Attack")
+
+[node name="Effect" type="CanvasLayer" parent="Controller"]
+layer = 128
+
+[node name="Attack" type="AnimatedSprite" parent="Controller/Effect"]
+visible = false
+frames = SubResource( 10 )
+centered = false
+offset = Vector2( 12, 12 )
