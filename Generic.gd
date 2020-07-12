@@ -1,5 +1,6 @@
 extends Position2D
 
+export(Array, Vector2) var ranges = []
 
 func move(direction: Vector2):
 	return $Controller.move(direction)
@@ -14,7 +15,7 @@ func attack() -> Array:
 	yield(get_tree(), "idle_frame")
 	var colliders: = []
 	yield(jump(), "completed")
-	for direction in $Range.ranges:
+	for direction in ranges:
 		var collider = $Controller.collider(direction)
 		if collider:
 			colliders.push_front(collider)
