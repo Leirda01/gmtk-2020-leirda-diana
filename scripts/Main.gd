@@ -115,7 +115,7 @@ func _on_Main_attack():
 		idx += 1
 	yield(get_tree().create_timer(1), "timeout")
 	for dead in grave:
-		dead.die()
+		yield(dead.die(), "completed")
 		$Enemies.remove_child(dead)
 		if dead.name == "Player":
 			emit_signal("game_over")

@@ -51,4 +51,7 @@ func animate_attack(phi: float):
 	pass
 
 func die():
+	yield(get_tree(), "idle_frame")
+	$Controller/AnimatedSprite.play("disappear")
+	yield($Controller/AnimatedSprite, "animation_finished")
 	queue_free()

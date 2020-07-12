@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://sprites/enemies/bald/normal.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Generic.gd" type="Script" id=2]
@@ -7,6 +7,31 @@
 [ext_resource path="res://sprites/enemies/bald/effect-adjacent.png" type="Texture" id=5]
 [ext_resource path="res://sprites/enemies/bald/red.png" type="Texture" id=6]
 [ext_resource path="res://sprites/enemies/bald/effect-diagonal.png" type="Texture" id=7]
+[ext_resource path="res://sprites/enemies/death.png" type="Texture" id=8]
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 24, 27 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 8 )
+region = Rect2( 24, 0, 24, 27 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 8 )
+region = Rect2( 48, 0, 24, 27 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 8 )
+region = Rect2( 72, 0, 24, 27 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 8 )
+region = Rect2( 96, 0, 24, 27 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 8 )
+region = Rect2( 120, 0, 24, 27 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -19,6 +44,11 @@ animations = [ {
 "loop": true,
 "name": "normal",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"loop": false,
+"name": "disappear",
+"speed": 15.0
 } ]
 
 [sub_resource type="AtlasTexture" id=2]
