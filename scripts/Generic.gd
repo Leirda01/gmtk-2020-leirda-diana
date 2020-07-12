@@ -1,10 +1,13 @@
 extends Position2D
 
 export(Array, Vector2) var ranges = []
+export(int) var speed = 1
 
 func move(direction: Vector2):
 	$Controller/AnimatedSprite.flip_h = true if direction.x < 0 else false
-	return $Controller.move(direction)
+	if not $Controller.move(speed * direction):
+		return $Controller.move(direction)
+	return true
 
 
 func hide_range():
@@ -40,5 +43,4 @@ func take_damage():
 
 
 func die():
-	print(self, " died.")
 	queue_free()
