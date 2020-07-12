@@ -6,69 +6,69 @@
 [ext_resource path="res://sprites/player/red.png" type="Texture" id=4]
 [ext_resource path="res://sprites/player/explode.png" type="Texture" id=5]
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 12, 27 )
+region = Rect2( 0, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 4 )
-region = Rect2( 12, 0, 12, 27 )
+region = Rect2( 39, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 4 )
-region = Rect2( 24, 0, 12, 27 )
+region = Rect2( 78, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 4 )
-region = Rect2( 36, 0, 12, 27 )
+region = Rect2( 117, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 4 )
-region = Rect2( 48, 0, 12, 27 )
+region = Rect2( 156, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 4 )
-region = Rect2( 60, 0, 12, 27 )
+region = Rect2( 195, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 4 )
-region = Rect2( 72, 0, 12, 27 )
+region = Rect2( 234, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 4 )
-region = Rect2( 84, 0, 12, 27 )
+region = Rect2( 273, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 12, 27 )
+region = Rect2( 0, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 1 )
-region = Rect2( 12, 0, 12, 27 )
+region = Rect2( 39, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=34]
 atlas = ExtResource( 1 )
-region = Rect2( 24, 0, 12, 27 )
+region = Rect2( 78, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=35]
 atlas = ExtResource( 1 )
-region = Rect2( 36, 0, 12, 27 )
+region = Rect2( 117, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=36]
 atlas = ExtResource( 1 )
-region = Rect2( 48, 0, 12, 27 )
+region = Rect2( 156, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 1 )
-region = Rect2( 60, 0, 12, 27 )
+region = Rect2( 195, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=38]
 atlas = ExtResource( 1 )
-region = Rect2( 72, 0, 12, 27 )
+region = Rect2( 234, 0, 39, 38 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=39]
 atlas = ExtResource( 1 )
-region = Rect2( 84, 0, 12, 27 )
+region = Rect2( 273, 0, 39, 38 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 5 )
@@ -96,18 +96,18 @@ region = Rect2( 195, 0, 39, 38 )
 
 [sub_resource type="SpriteFrames" id=23]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
 "loop": true,
 "name": "red",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
 "loop": true,
 "name": "normal",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
-"loop": true,
+"loop": false,
 "name": "explode",
 "speed": 10.0
 } ]
@@ -121,6 +121,7 @@ speed = 3
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Controller"]
 frames = SubResource( 23 )
 animation = "normal"
+frame = 1
 playing = true
 centered = false
-offset = Vector2( 6, -11 )
+offset = Vector2( -8, -22 )
