@@ -3,6 +3,7 @@ extends Position2D
 export(Array, Vector2) var ranges = []
 
 func move(direction: Vector2):
+	$Controller/AnimatedSprite.flip_h = true if direction.x < 0 else false
 	return $Controller.move(direction)
 
 

@@ -25,6 +25,7 @@ func take_damage():
 	yield(get_tree(), "idle_frame")
 	$Controller/AnimatedSprite.play("red")
 
+
 func die():
 	$Controller/AnimatedSprite.play("explode")
 	yield($Controller/AnimatedSprite, "animation_finished")

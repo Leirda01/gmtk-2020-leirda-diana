@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/5.png-90f9d3f89400b089d26ea424bfb615bb.stex"
+path="res://.import/arrow_down.png-0435cdc4ad01094e10e4f6823d4c4679.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/enemies/ranges/5.png"
-dest_files=[ "res://.import/5.png-90f9d3f89400b089d26ea424bfb615bb.stex" ]
+source_file="res://sprites/arrows/arrow_down.png"
+dest_files=[ "res://.import/arrow_down.png-0435cdc4ad01094e10e4f6823d4c4679.stex" ]
 
 [params]
 
