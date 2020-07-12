@@ -17,11 +17,12 @@ func show_range():
 func attack() -> Array:
 	yield(get_tree(), "idle_frame")
 	var colliders: = []
-	yield(jump(), "completed")
 	for direction in ranges:
 		var collider = $Controller.collider(direction)
 		if collider and not collider in colliders:
 			colliders.push_front(collider)
+	if not colliders.empty():
+		yield(jump(), "completed")
 	return colliders
 
 
@@ -32,7 +33,6 @@ func jump():
 
 
 func take_damage():
-	print(self.name, ": ouch!")
 	yield(get_tree(), "idle_frame")
 	for _i in range(10):
 		yield(get_tree().create_timer(0.1), "timeout")

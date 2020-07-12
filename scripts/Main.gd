@@ -38,7 +38,7 @@ func _process(_delta):
 	else:
 		for key in input_list.keys():
 			if enemy_list.front().get_node("Controller").can_move(vectors[key]):
-				$Cursor.hilight(enemy_list.front())
+				enemy_list.front().show_range()
 				return
 		print("SKIP")
 		enemy_list.pop_front()
@@ -48,7 +48,7 @@ func _input(event):
 	if not enemy_list.empty():
 		for key in input_list.keys():
 			if event.is_action_released(key) and enemy_list.front().move(vectors[key]):
-				enemy_list.pop_front()
+				enemy_list.pop_front().hide_range()
 				remove_from_input_list(key)
 				$HUD.display_input(input_list)
 
@@ -90,7 +90,6 @@ func _on_Main_next_turn():
 func _on_Main_attack():
 	var grave: = []
 	attack = true
-	$Cursor.hide()
 	var idx = 0
 	while idx < $Enemies.get_child_count():
 		for entity in yield($Enemies.get_child(idx).attack(), "completed"):
