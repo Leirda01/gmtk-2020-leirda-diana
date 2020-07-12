@@ -83,14 +83,9 @@ offset = Vector2( -3, -12 )
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Controller"]
 remote_path = NodePath("../../Range")
 
-[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Controller"]
-remote_path = NodePath("../Effect/Attack")
-
-[node name="Effect" type="CanvasLayer" parent="Controller"]
-layer = 128
-
-[node name="Attack" type="AnimatedSprite" parent="Controller/Effect"]
+[node name="Attack" type="AnimatedSprite" parent="Controller"]
 visible = false
+position = Vector2( 12, 0 )
 frames = SubResource( 10 )
 centered = false
 offset = Vector2( 12, 12 )

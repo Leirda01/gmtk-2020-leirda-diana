@@ -97,7 +97,7 @@ func _on_Main_attack():
 		for entity in yield($Enemies.get_child(idx).attack(), "completed"):
 			if entity.get_owner().has_method("take_damage"):
 				yield($Enemies.get_child(idx).jump(
-					$Enemies.get_child(idx).position.angle_to(entity.position)
+					$Enemies.get_child(idx).global_position.angle_to(entity.global_position)
 				), "completed")
 				grave.push_front(entity.get_owner())
 				yield(entity.get_owner().call("take_damage"), "completed")
