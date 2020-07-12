@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Entity.gd" type="Script" id=1]
+[ext_resource path="res://sprites/arrows/arrow_right.png" type="Texture" id=2]
+[ext_resource path="res://sprites/arrows/arrow_up.png" type="Texture" id=3]
+[ext_resource path="res://sprites/arrows/arrow_left.png" type="Texture" id=4]
+[ext_resource path="res://sprites/arrows/arrow_down.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 6 )
@@ -16,3 +20,23 @@ shape = SubResource( 1 )
 position = Vector2( 12, 12 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Right" type="Sprite" parent="."]
+visible = false
+position = Vector2( 36, 12 )
+texture = ExtResource( 2 )
+
+[node name="Up" type="Sprite" parent="."]
+visible = false
+position = Vector2( 12, -12 )
+texture = ExtResource( 3 )
+
+[node name="Left" type="Sprite" parent="."]
+visible = false
+position = Vector2( -12, 12 )
+texture = ExtResource( 4 )
+
+[node name="Down" type="Sprite" parent="."]
+visible = false
+position = Vector2( 12, 36 )
+texture = ExtResource( 5 )

@@ -40,7 +40,7 @@ func _process(_delta):
 	else:
 		for key in input_list.keys():
 			if enemy_list.front().get_node("Controller").can_move(vectors[key]):
-				enemy_list.front().show_range()
+				enemy_list.front().show_range(input_list.keys())
 				return
 		enemy_list.pop_front().hide_range()
 

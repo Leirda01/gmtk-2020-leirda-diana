@@ -11,10 +11,12 @@ func move(direction: Vector2):
 
 
 func hide_range():
+	$Controller.hide_directions()
 	$Range.visible = false
 
 
-func show_range():
+func show_range(available_directions: Array):
+	$Controller.show_available_directions(available_directions)
 	$Range.visible = true
 
 
