@@ -76,7 +76,7 @@ static func get_clean_input_list() -> Dictionary:
 
 
 func _on_Main_next_turn():
-	$Player.random_move()
+	$Enemies/HideSeek/Player.random_move()
 	if (score % 2 == 0):
 		$Spawners/Center.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
 		$Spawners/Up.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
@@ -119,8 +119,10 @@ func _on_Main_game_over():
 		hiscore = score
 	score = 0
 	yield(get_tree().create_timer(3.0), "timeout")
+	$Enemies/HideSeek/Player.initialize(Vector2(230, 134))
 	for enemy in $Enemies.get_children():
+		if enemy.name == "HideSeek":
+			continue
 		enemy.queue_free()
 		$Enemies.remove_child(enemy)
-	$Player.initialize(Vector2(230, 134))
 	emit_signal("next_turn")
