@@ -121,7 +121,7 @@ speed = 3
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Controller"]
 frames = SubResource( 23 )
 animation = "normal"
-frame = 6
+frame = 1
 playing = true
 centered = false
 offset = Vector2( -8, -22 )

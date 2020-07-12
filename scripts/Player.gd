@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 const ranges = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 
@@ -23,6 +23,10 @@ func available_directions():
 
 func take_damage():
 	yield(get_tree(), "idle_frame")
+	$Controller/AnimatedSprite.play("red")
+	for _i in range(4):
+		yield(get_tree().create_timer(0.1), "timeout")
+		set_visible(not visible)
 	$Controller/AnimatedSprite.play("red")
 
 
