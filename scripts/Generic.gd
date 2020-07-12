@@ -21,8 +21,6 @@ func attack() -> Array:
 		var collider = $Controller.collider(direction)
 		if collider and not collider in colliders:
 			colliders.push_front(collider)
-	if not colliders.empty():
-		yield(jump(), "completed")
 	return colliders
 
 
@@ -41,4 +39,5 @@ func take_damage():
 
 
 func die():
-	self.queue_free()
+	print(self, " died.")
+	queue_free()

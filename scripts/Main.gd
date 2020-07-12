@@ -40,8 +40,7 @@ func _process(_delta):
 			if enemy_list.front().get_node("Controller").can_move(vectors[key]):
 				enemy_list.front().show_range()
 				return
-		print("SKIP")
-		enemy_list.pop_front()
+		enemy_list.pop_front().hide_range()
 
 
 func _input(event):
@@ -94,7 +93,11 @@ func _on_Main_attack():
 	while idx < $Enemies.get_child_count():
 		for entity in yield($Enemies.get_child(idx).attack(), "completed"):
 			if entity.get_owner().has_method("take_damage"):
-				grave.push_front(entity)
+				yield($Enemies.get_child(idx).jump(), "completed")
+				grave.push_front(entity.get_owner())
 				yield(entity.get_owner().call("take_damage"), "completed")
 		idx += 1
+	for dead in grave:
+		dead.die()
+		$Enemies.remove_child(dead)
 	emit_signal("next_turn")
