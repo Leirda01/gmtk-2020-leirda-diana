@@ -36,11 +36,11 @@ script = ExtResource( 6 )
 [node name="HideSeek" type="Node" parent="Enemies"]
 script = ExtResource( 7 )
 
+[node name="Controller" type="Node2D" parent="Enemies/HideSeek"]
+script = ExtResource( 7 )
+
 [node name="Player" parent="Enemies/HideSeek" instance=ExtResource( 2 )]
 position = Vector2( 230, 134 )
-
-[node name="Controller" type="Position2D" parent="Enemies/HideSeek"]
-script = ExtResource( 7 )
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 margin_left = 408.0

@@ -78,12 +78,12 @@ static func get_clean_input_list() -> Dictionary:
 
 
 func _on_Main_next_turn():
-	$Enemies/HideSeek/Player.random_move()
 	var coucou = Spawner.instance()
 	for i in range(score / 15 + 4):
 		coucou.position = get_random_free_position()
 		coucou.add_enemy($Enemies, Enemies[randi() % Enemies.size()].instance())
 	$Enemies.sort()
+	$Enemies/HideSeek/Player.random_move()
 	score += 1
 	$HUD.display_score(score, hiscore)
 	input_list = get_random_input_list($Enemies.get_child_count() + 1)
@@ -97,7 +97,7 @@ func get_random_free_position():
 		var guess: = Vector2(randi() % 16 * 24 + 14, randi() % 9 * 24 + 14)
 		for item in $Enemies.get_children():
 			if item.get_node("Controller").position == guess:
-				break
+				guess = Vector2(randi() % 16 * 24 + 14, randi() % 9 * 24 + 14)
 		return guess
 
 func _on_Main_attack():
@@ -110,7 +110,8 @@ func _on_Main_attack():
 				yield($Enemies.get_child(idx).jump(
 					$Enemies.get_child(idx).get_node("Controller").global_position.angle_to(entity.global_position)
 				), "completed")
-				grave.push_front(entity.get_owner())
+				if not entity.get_owner() in grave:
+					grave.push_front(entity.get_owner())
 				yield(entity.get_owner().call("take_damage"), "completed")
 		idx += 1
 	yield(get_tree().create_timer(1), "timeout")
